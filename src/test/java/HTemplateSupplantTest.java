@@ -11,24 +11,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HTemplateSupplantTest {
 
+  private final static String TEMPLATE_FILE = "src/test/resources/HTemplateSupplantTestTemplate.java.template";
+
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-  private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
   @BeforeEach
   void setUpStreams() {
     System.setOut(new PrintStream(outContent));
-    System.setErr(new PrintStream(errContent));
   }
 
   @AfterEach
   void cleanUpStreams() {
     System.setOut(null);
-    System.setErr(null);
   }
 
   @Test
-  void replace1() {
-    HTemplateSupplant supplant = new HTemplateSupplant("src/test/resources/HTemplateSupplantTestTemplate.java.template");
+  void replace() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE);
     supplant.replace("CLASSNAME", "HelloWorld");
     supplant.replace("TEXT", "World");
     String s = supplant.get();
@@ -39,47 +38,63 @@ class HTemplateSupplantTest {
   }
 
   @Test
-  void replace2() {
-    HTemplateSupplant supplant = new HTemplateSupplant("src/test/resources/HTemplateSupplantTestTemplate.java.template", 6);
+  void replaceNoTrim() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE, 6);
     supplant.replaceNoTrim("TEXT", "   World   ");
     String s = supplant.get();
     assertEquals(true, s.contains("   World   "));
     assertEquals(false, s.contains("TEXT"));
+  }
 
+  @Test
+  void out() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE, 6);
+    supplant.replaceNoTrim("TEXT", "   World   ");
     supplant.out();
     assertEquals("  System.out.println(\"Hello    World   \");\r\n", outContent.toString());
   }
 
   @Test
-  void replace3() {
-    HTemplateSupplant supplant = new HTemplateSupplant("src/test/resources/HTemplateSupplantTestTemplate.java.template", 5, 8);
-    StringBuilder sb = new StringBuilder("   World   ");
-    supplant.replace("TEXT", sb);
-    try {
-      supplant.replace("TEXT2", sb);
-    } catch(IllegalArgumentException iae) {
-      assertEquals("tag <TEXT2> not found", iae.getMessage());
-    }
+  void replace_StringBuilder() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE);
+    supplant.replace("CLASSNAME", new StringBuilder("HelloWorld"));
+    supplant.replace("TEXT", new StringBuilder("World"));
     String s = supplant.get();
+    assertEquals(true, s.contains("HelloWorld"));
     assertEquals(true, s.contains("World"));
-    assertEquals(false, s.contains("   World   "));
+    assertEquals(false, s.contains("CLASSNAME"));
     assertEquals(false, s.contains("TEXT"));
+  }
 
-    s = supplant.getNL();
+  @Test
+  void getNL() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE, 5, 8);
+    supplant.replace("TEXT", "   World   ");
+    String s = supplant.getNL();
     assertEquals(true, s.endsWith("\n"));
   }
 
   @Test
-  void write() throws IOException {
-    HTemplateSupplant supplant = new HTemplateSupplant("src/test/resources/HTemplateSupplantTestTemplate.java.template", 6);
-    supplant.write("Test.java");
-    String newFile = HUtils.readFile("Test.java", Charset.forName("UTF-8"));
-    assertEquals("  System.out.println(\"Hello %TEXT%\");\r\n", newFile);
-    HUtils.deleteFile("Test.java");
+  void tagNotFound() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE, 5, 8);
+    try {
+      supplant.replace("TEXT2", "   World   ");
+    } catch(IllegalArgumentException iae) {
+      assertEquals("tag <TEXT2> not found", iae.getMessage());
+    }
+  }
 
-    supplant.write("Test2.java");
-    newFile = HUtils.readFile("Test2.java", Charset.forName("UTF-8"));
+  @Test
+  void write() throws IOException {
+    write("Test1.java");
+    write("Test2.java");
+  }
+
+  private void write(String filename) throws IOException {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE, 6);
+    supplant.write(filename);
+    String newFile = HUtils.readFile(filename, Charset.forName("UTF-8"));
     assertEquals("  System.out.println(\"Hello %TEXT%\");\r\n", newFile);
-    HUtils.deleteFile("Test2.java");
+    HUtils.deleteFile(filename);
   }
 }

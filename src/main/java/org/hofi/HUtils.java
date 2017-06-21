@@ -35,8 +35,7 @@ public class HUtils {
   }
 
   public static void deleteFile(String filename) throws FileNotFoundException {
-    File f = new File(filename);
-    if(!f.delete())
+    if(!new File(filename).delete())
       throw new IllegalStateException("error deleting file <" + filename + ">");
   }
 
