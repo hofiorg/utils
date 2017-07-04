@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Properties;
 
 public class HUtils {
@@ -40,5 +41,9 @@ public class HUtils {
   public static String readFile(String filename, Charset encoding) throws IOException {
     byte[] encoded = Files.readAllBytes(Paths.get(filename));
     return new String(encoded, encoding);
+  }
+
+  public static void printAllProperties(Properties p) {
+    Collections.list(p.keys()).forEach((o) -> System.out.println(o + ": " + p.getProperty(o.toString())));
   }
 }
