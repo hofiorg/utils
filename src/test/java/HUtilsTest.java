@@ -71,6 +71,7 @@ class HUtilsTest {
   @Test
   void removeLastLetterIf() {
     assertEquals("Hello", HUtils.removeLastLetterIf("Hellos", 's'));
+    assertEquals("Hello", HUtils.removeLastLetterIf("Hellox", 'x'));
     assertEquals("Hellso", HUtils.removeLastLetterIf("Hellso", 's'));
   }
 }
