@@ -46,4 +46,11 @@ public class HUtils {
   public static void printAllProperties(Properties p) {
     Collections.list(p.keys()).forEach((o) -> System.out.println(o + ": " + p.getProperty(o.toString())));
   }
+
+  public static String removeLastLetterIf(String value, char letter) {
+    if(value.charAt(value.length() - 1) == letter) {
+      return value.substring(0, value.length() - 1);
+    }
+    return value;
+  }
 }

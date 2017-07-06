@@ -67,4 +67,10 @@ class HUtilsTest {
 
     assertEquals("hello: 1\r\nworld: 2\r\n", outContent.toString());
   }
+
+  @Test
+  void removeLastLetterIf() {
+    assertEquals("Hello", HUtils.removeLastLetterIf("Hellos", 's'));
+    assertEquals("Hellso", HUtils.removeLastLetterIf("Hellso", 's'));
+  }
 }
