@@ -38,6 +38,7 @@ public class HTemplateSupplant {
   }
 
   public void replace(String tag, String replace) {
+    replace = replace.replaceAll("\\$", "\\\\\\$");
     replace = replace.replaceAll("^\\s+|\\s+$", "");
     replaceNoTrim(tag, replace);
   }

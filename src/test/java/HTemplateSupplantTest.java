@@ -97,4 +97,13 @@ class HTemplateSupplantTest {
     assertEquals("  System.out.println(\"Hello %TEXT%\");\r\n", newFile);
     HUtils.deleteFile(filename);
   }
+
+  @Test
+  void replaceWithDollarSign() {
+    HTemplateSupplant supplant = new HTemplateSupplant(TEMPLATE_FILE);
+    supplant.replace("CLASSNAME", "Hello$World");
+    String s = supplant.get();
+    assertEquals(true, s.contains("Hello$World"));
+    assertEquals(false, s.contains("CLASSNAME"));
+  }
 }
