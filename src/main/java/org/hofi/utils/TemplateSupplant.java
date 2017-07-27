@@ -1,4 +1,4 @@
-package org.hofi;
+package org.hofi.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,23 +9,23 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class HTemplateSupplant {
+public class TemplateSupplant {
 
   private String templateFile;
 
-  public HTemplateSupplant(String templateFilename) throws UncheckedIOException {
+  public TemplateSupplant(String templateFilename) throws UncheckedIOException {
     try {
-      templateFile = HUtils.readFile(templateFilename, Charset.forName("UTF-8"));
+      templateFile = Utils.readFile(templateFilename, Charset.forName("UTF-8"));
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
   }
 
-  public HTemplateSupplant(String templateFilename, int line) throws UncheckedIOException {
+  public TemplateSupplant(String templateFilename, int line) throws UncheckedIOException {
     this(templateFilename, line, line);
   }
 
-  public HTemplateSupplant(String templateFilename, int startLine, int endLine) throws UncheckedIOException {
+  public TemplateSupplant(String templateFilename, int startLine, int endLine) throws UncheckedIOException {
     try {
       templateFile = readFile(templateFilename, startLine, endLine);
     } catch (IOException e) {

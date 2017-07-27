@@ -1,4 +1,4 @@
-package org.hofi;
+package org.hofi.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,10 +10,10 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Properties;
 
-public class HUtils {
+public class Utils {
   public static Properties readProperties(String propertiesFile) throws IOException {
     Properties prop = new Properties();
-    InputStream in = HUtils.class.getResourceAsStream(propertiesFile);
+    InputStream in = Utils.class.getResourceAsStream(propertiesFile);
     if(in == null)
       throw new FileNotFoundException("file <" + propertiesFile + "> not found");
     prop.load(in);
@@ -52,5 +52,11 @@ public class HUtils {
       return value.substring(0, value.length() - 1);
     }
     return value;
+  }
+
+  public static void printNewlines(int numberOfLines) {
+    for(int i = 0; i < numberOfLines; i++){
+      System.out.println("");
+    }
   }
 }
