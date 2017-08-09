@@ -39,4 +39,22 @@ public class Utils {
     }
     return result.toString();
   }
+
+  public static String snipBefore(String s, String before) {
+    if(!s.contains(before))
+      return s;
+    return s.substring(0, s.indexOf(before));
+  }
+
+  public static String snipAfter(String s, String last) {
+    if(!s.contains(last))
+      return s;
+    return s.substring(s.indexOf(last) + 1);
+  }
+
+  public static String snipAfterLast(String s, String last) {
+    if(!s.contains(last))
+      return s;
+    return s.substring(s.lastIndexOf(last) + 1);
+  }
 }

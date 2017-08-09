@@ -61,4 +61,24 @@ class UtilsTest {
     assertEquals("      ", Utils.indent(3));
     assertEquals("         ", Utils.indent(3, 3));
   }
+
+  @Test
+  void snipBefore() {
+    assertEquals("hello", Utils.snipBefore("hello", "."));
+    assertEquals("hello", Utils.snipBefore("hello.world", "."));
+  }
+
+  @Test
+  void snipAfterLast() {
+    assertEquals("hello", Utils.snipAfterLast("hello", "."));
+    assertEquals("world", Utils.snipAfterLast("hello.world", "."));
+    assertEquals("bla", Utils.snipAfterLast("hello.world.bla", "."));
+  }
+
+  @Test
+  void snipAfter() {
+    assertEquals("hello", Utils.snipAfter("hello", "."));
+    assertEquals("world", Utils.snipAfter("hello.world", "."));
+    assertEquals("world.bla", Utils.snipAfter("hello.world.bla", "."));
+  }
 }
