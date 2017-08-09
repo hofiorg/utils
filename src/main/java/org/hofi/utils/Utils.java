@@ -46,10 +46,10 @@ public class Utils {
     return s.substring(0, s.indexOf(before));
   }
 
-  public static String snipAfter(String s, String last) {
-    if(!s.contains(last))
+  public static String snipAfter(String s, String after) {
+    if(!s.contains(after))
       return s;
-    return s.substring(s.indexOf(last) + 1);
+    return s.substring(s.indexOf(after) + 1);
   }
 
   public static String snipAfterLast(String s, String last) {
