@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.hofi.utils</groupId>
     <artifactId>hofiutils</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>Hofi utils</name>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.0.0-M4</version>
+            <version>5.0.0-M5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -14,7 +14,7 @@ public class TemplateSupplant {
 
   public TemplateSupplant(String templateFilename) throws UncheckedIOException {
     try {
-      templateFile = Utils.readFile(templateFilename);
+      templateFile = FileUtils.readFile(templateFilename);
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }

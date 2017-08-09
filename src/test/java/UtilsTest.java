@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,5 +54,11 @@ class UtilsTest {
   void printNewlines() {
     Utils.printNewlines(5);
     assertEquals("\r\n\r\n\r\n\r\n\r\n", outContent.toString());
+  }
+
+  @Test
+  void indent() {
+    assertEquals("      ", Utils.indent(3));
+    assertEquals("         ", Utils.indent(3, 3));
   }
 }

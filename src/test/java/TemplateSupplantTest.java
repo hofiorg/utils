@@ -1,3 +1,4 @@
+import org.hofi.utils.FileUtils;
 import org.hofi.utils.TemplateSupplant;
 import org.hofi.utils.Utils;
 import org.junit.jupiter.api.*;
@@ -92,9 +93,9 @@ class TemplateSupplantTest {
   private void write(String filename) throws IOException {
     TemplateSupplant supplant = new TemplateSupplant(TEMPLATE_FILE, 6);
     supplant.write(filename);
-    String newFile = Utils.readFile(filename);
+    String newFile = FileUtils.readFile(filename);
     assertEquals("  System.out.println(\"Hello %TEXT%\");\r\n", newFile);
-    Utils.deleteFile(filename);
+    FileUtils.deleteFile(filename);
   }
 
   @Test
