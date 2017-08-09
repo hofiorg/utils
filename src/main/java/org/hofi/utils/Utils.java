@@ -3,6 +3,7 @@ package org.hofi.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,9 +26,15 @@ public class Utils {
       throw new IllegalStateException("error deleting file <" + filename + ">");
   }
 
-  public static String readFile(String filename, Charset encoding) throws IOException {
+  public static String readFile(String filename) throws IOException {
     byte[] encoded = Files.readAllBytes(Paths.get(filename));
-    return new String(encoded, encoding);
+    return new String(encoded, Charset.forName("UTF-8"));
+  }
+
+  public static void writeFile(String filename, String text) throws FileNotFoundException {
+    try(PrintWriter out = new PrintWriter(filename)) {
+      out.println( text );
+    }
   }
 
   public static String removeLastLetterIf(String value, char letter) {

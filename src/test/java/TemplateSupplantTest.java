@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -93,7 +92,7 @@ class TemplateSupplantTest {
   private void write(String filename) throws IOException {
     TemplateSupplant supplant = new TemplateSupplant(TEMPLATE_FILE, 6);
     supplant.write(filename);
-    String newFile = Utils.readFile(filename, Charset.forName("UTF-8"));
+    String newFile = Utils.readFile(filename);
     assertEquals("  System.out.println(\"Hello %TEXT%\");\r\n", newFile);
     Utils.deleteFile(filename);
   }
