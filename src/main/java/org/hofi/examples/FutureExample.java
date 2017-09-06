@@ -11,21 +11,13 @@ public class FutureExample {
   }
 
   private FutureExample() throws ExecutionException, InterruptedException {
-
     long millis = System.currentTimeMillis();
-
     Future<String> myfuture = futureFunc();
-
     Thread.sleep(500);
-
     out.println("hello world 1");
-
     String value = myfuture.get();
-
     out.println(value);
-
     pool.shutdown();
-
     out.println(System.currentTimeMillis() - millis + " ms");
   }
 
