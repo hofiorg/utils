@@ -46,6 +46,6 @@ class PropertyUtilsTest {
     p.setProperty("world", "2");
     PropertyUtils.printAllProperties(p);
 
-    assertEquals("hello: 1\r\nworld: 2\r\n", outContent.toString());
+    assertEquals("hello: 1" + System.getProperty("line.separator") + "world: 2" + System.getProperty("line.separator"), outContent.toString());
   }
 }

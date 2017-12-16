@@ -51,7 +51,7 @@ class TemplateSupplantTest {
     TemplateSupplant supplant = new TemplateSupplant(TEMPLATE_FILE, 6);
     supplant.replaceNoTrim("TEXT", "   World   ");
     supplant.out();
-    assertEquals("  System.out.println(\"Hello    World   \");\r\n", outContent.toString());
+    assertEquals("  System.out.println(\"Hello    World   \");" + System.getProperty("line.separator"), outContent.toString());
   }
 
   @Test
@@ -94,7 +94,7 @@ class TemplateSupplantTest {
     TemplateSupplant supplant = new TemplateSupplant(TEMPLATE_FILE, 6);
     supplant.write(filename);
     String newFile = FileUtils.readFile(filename);
-    assertEquals("  System.out.println(\"Hello %TEXT%\");\r\n", newFile);
+    assertEquals("  System.out.println(\"Hello %TEXT%\");" + System.getProperty("line.separator"), newFile);
     FileUtils.deleteFile(filename);
   }
 

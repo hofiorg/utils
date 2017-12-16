@@ -53,7 +53,12 @@ class UtilsTest {
   @Test
   void printNewlines() {
     Utils.printNewlines(5);
-    assertEquals("\r\n\r\n\r\n\r\n\r\n", outContent.toString());
+    assertEquals("" +
+          System.getProperty("line.separator")
+        + System.getProperty("line.separator")
+        + System.getProperty("line.separator")
+        + System.getProperty("line.separator")
+        + System.getProperty("line.separator"), outContent.toString());
   }
 
   @Test
