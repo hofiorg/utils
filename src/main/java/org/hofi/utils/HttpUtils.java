@@ -2,12 +2,22 @@ package org.hofi.utils;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 public class HttpUtils {
+  public static void downloadFileHttp(String urlString, String filename) throws IOException {
+    URL url = new URL(urlString);
+    ReadableByteChannel rbc = Channels.newChannel(url.openStream());
+    FileOutputStream fos = new FileOutputStream(filename);
+    fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+  }
+
   public static String readHTTPResponseToString(String parseUrl) throws IOException {
     URL url = new URL(parseUrl);
     URLConnection con = url.openConnection();

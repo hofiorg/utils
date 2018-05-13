@@ -14,4 +14,11 @@ class FileUtilsTest {
     assertEquals("helloWorld", s);
     FileUtils.deleteFile("readWriteFile.test");
   }
+
+  @Test
+  void makeDirDeleteDirRecursive() throws IOException {
+    FileUtils.makeDir("hello");
+    FileUtils.makeDir("hello/world");
+    FileUtils.deleteDirRecursive("hello");
+  }
 }
