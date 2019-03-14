@@ -12,7 +12,7 @@ public class TemplateSupplant {
 
   private String templateFile;
 
-  public TemplateSupplant(String templateFilename) throws UncheckedIOException {
+  public TemplateSupplant(String templateFilename) {
     try {
       templateFile = FileUtils.readFile(templateFilename);
     } catch (IOException e) {
@@ -20,11 +20,11 @@ public class TemplateSupplant {
     }
   }
 
-  public TemplateSupplant(String templateFilename, int line) throws UncheckedIOException {
+  public TemplateSupplant(String templateFilename, int line) {
     this(templateFilename, line, line);
   }
 
-  public TemplateSupplant(String templateFilename, int startLine, int endLine) throws UncheckedIOException {
+  public TemplateSupplant(String templateFilename, int startLine, int endLine) {
     try {
       templateFile = readFile(templateFilename, startLine, endLine);
     } catch (IOException e) {

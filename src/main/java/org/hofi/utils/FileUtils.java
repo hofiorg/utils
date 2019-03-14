@@ -3,14 +3,19 @@ package org.hofi.utils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.stream.Stream;
 
 public class FileUtils {
+
+  private FileUtils() {}
+
   public static void makeDir(String dir) throws IOException {
     Path path = Paths.get(dir);
     Files.createDirectory(path);
@@ -18,9 +23,10 @@ public class FileUtils {
 
   public static void deleteDirRecursive(String dir) throws IOException {
     Path path = Paths.get(dir);
-    Files.walk(path, FileVisitOption.FOLLOW_LINKS)
-      .sorted(Comparator.reverseOrder())
-      .forEach(FileUtils::deleteFile);
+    try (Stream<Path> walk = Files.walk(path, FileVisitOption.FOLLOW_LINKS)){
+      walk.sorted(Comparator.reverseOrder())
+          .forEach(FileUtils::deleteFile);
+    }
   }
 
   public static void deleteFile(String filename) throws IOException {
@@ -32,7 +38,7 @@ public class FileUtils {
     try {
       Files.delete(path);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new UncheckedIOException(e);
     }
   }
 

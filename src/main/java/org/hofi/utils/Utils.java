@@ -1,6 +1,9 @@
 package org.hofi.utils;
 
 public class Utils {
+
+  private Utils() {}
+
   public static String firstLetterToLowerCase(String value) {
     return Character.toLowerCase(value.charAt(0)) + value.substring(1);
   }
@@ -22,7 +25,7 @@ public class Utils {
 
   public static void printNewlines(int numberOfLines) {
     for(int i = 0; i < numberOfLines; i++){
-      System.out.println("");
+      System.out.println();
     }
   }
 

@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class PropertyUtils {
+
+  private PropertyUtils() {}
+
   public static Properties readProperties(String propertiesFile) throws IOException {
     Properties prop = new Properties();
     InputStream in = Utils.class.getResourceAsStream(propertiesFile);
@@ -18,6 +21,6 @@ public class PropertyUtils {
   }
 
   public static void printAllProperties(Properties p) {
-    Collections.list(p.keys()).forEach((o) -> System.out.println(o + ": " + p.getProperty(o.toString())));
+    Collections.list(p.keys()).forEach(o -> System.out.println(o + ": " + p.getProperty(o.toString())));
   }
 }

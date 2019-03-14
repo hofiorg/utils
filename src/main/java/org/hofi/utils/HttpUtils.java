@@ -11,11 +11,16 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
 public class HttpUtils {
+
+  private HttpUtils() {}
+
   public static void downloadFileHttp(String urlString, String filename) throws IOException {
     URL url = new URL(urlString);
-    ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-    FileOutputStream fos = new FileOutputStream(filename);
-    fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+    try(ReadableByteChannel rbc = Channels.newChannel(url.openStream())) {
+      try (FileOutputStream fos = new FileOutputStream(filename)) {
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+      }
+    }
   }
 
   public static String readHTTPResponseToString(String parseUrl) throws IOException {
