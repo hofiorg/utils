@@ -1,4 +1,4 @@
-# Java Utility Library (hofiutils)  &middot; [![Build Status](https://travis-ci.org/hofiorg/utils.svg?branch=master)](https://travis-ci.org/hofiorg/utils)
+# Java Utility Library (hofiutils) &middot; ![maven workflow](https://github.com/hofiorg/utils/actions/workflows/maven.yml/badge.svg)
 
 ## Installation
 
